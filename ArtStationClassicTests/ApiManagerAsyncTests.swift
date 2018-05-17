@@ -34,7 +34,7 @@ class ApiManagerAsyncTests: XCTestCase {
             promise.fulfill()
             print("==== sutApiManager.makeRequest callback FAILURE: \(apiError.localizedDescription)")
         }
-        waitForExpectations(timeout: 3)
+        waitForExpectations(timeout: 5)
         // ASSERT
         
         XCTAssertEqual(receivedResponse?.projects?.count, expectedProjectsCount)

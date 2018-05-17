@@ -12,15 +12,9 @@ final class ProjectsGetRequest: Request {
         static let sorting = "sorting"
     }
     
-    static let defaultSorting = "trending"
+    // MARK: - Type Properties
     
-    func urlRequest() throws -> URLRequest {
-        if let url = urlForRequest(page: page) {
-            return URLRequest(url: url)
-        } else {
-            throw ApiError.badRequest
-        }
-    }
+    private static let defaultSorting = "trending"
     
     // MARK: - Instance Properties
     
@@ -35,10 +29,19 @@ final class ProjectsGetRequest: Request {
     
     // MARK: - Instance Methods
     
+    func urlRequest() throws -> URLRequest {
+        if let url = urlForRequest(page: page) {
+            return URLRequest(url: url)
+        } else {
+            throw ApiError.badRequest
+        }
+    }
+    
+    // MARK: - Private
+    
     private func urlForRequest(page: Int) -> URL? {
         
         let methodUrl = baseURL.appendingPathComponent(path)
-        
         var urlComponents = URLComponents(url: methodUrl, resolvingAgainstBaseURL: false)!
         
         urlComponents.queryItems = [
