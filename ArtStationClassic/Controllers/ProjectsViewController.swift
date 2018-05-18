@@ -9,6 +9,7 @@ final class ProjectsViewController: UIViewController {
     
     private struct Consts {
         static let cellReuseIdenrtifier = "ProjectCell"
+        static let detailSegueIdentifier = "ShowProjectDetails"
         static let cellsInRow: CGFloat = 3.0
         static let cellsSpacing: CGFloat = 4.0
     }
@@ -17,6 +18,7 @@ final class ProjectsViewController: UIViewController {
     var projectViewModels: [ProjectViewModel] = []
     var nextPage = 1
     var pagesInPrefetching: Set<Int> = []
+    var selectedProjectViewModel: ProjectViewModel?
     
     private func beginUpdates() {
         // show spinner, block UI
@@ -89,6 +91,17 @@ extension ProjectsViewController: UICollectionViewDataSource {
                   forCellsInRow: Consts.cellsInRow,
                   withSpacing: Consts.cellsSpacing)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Consts.detailSegueIdentifier {
+            guard let viewController = segue.destination as? ProjectDetailsViewController
+                else { fatalError("==== Wrong viewController class") }
+            
+            guard let selectedProjectViewModel = selectedProjectViewModel else { return }
+            viewController.detailLink = selectedProjectViewModel.detailLink
+        }
+        
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -97,7 +110,7 @@ extension ProjectsViewController: UICollectionViewDelegate {
         
         // show
 //        guard let selectedCell = collectionView.cellForItem(at: indexPath) else { return }
-        let selectedProjectViewModel = projectViewModels[indexPath.item]
-        print("=== selected item: \(selectedProjectViewModel.id)")
+        selectedProjectViewModel = projectViewModels[indexPath.item]
+        performSegue(withIdentifier: Consts.detailSegueIdentifier, sender: nil)
     }
 }

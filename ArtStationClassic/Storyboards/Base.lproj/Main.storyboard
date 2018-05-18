@@ -84,11 +84,47 @@
                     <navigationItem key="navigationItem" id="cEp-Ic-Gra"/>
                     <connections>
                         <outlet property="collectionView" destination="CsN-nJ-OSu" id="hbL-sU-fNf"/>
+                        <segue destination="dXJ-EF-Hk3" kind="show" identifier="ShowProjectDetails" id="dfN-zf-cWM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="964" y="30.134932533733135"/>
+        </scene>
+        <!--Project Details View Controller-->
+        <scene sceneID="M7M-9l-01r">
+            <objects>
+                <viewController id="dXJ-EF-Hk3" customClass="ProjectDetailsViewController" customModule="ArtStationClassic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iqy-39-4US">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hV-Yu-JDn">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <dataDetectorTypes key="dataDetectorTypes"/>
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1hV-Yu-JDn" firstAttribute="leading" secondItem="k5G-mR-hca" secondAttribute="leading" id="9Mg-sg-2dz"/>
+                            <constraint firstItem="1hV-Yu-JDn" firstAttribute="top" secondItem="k5G-mR-hca" secondAttribute="top" id="cQy-SS-pNq"/>
+                            <constraint firstItem="k5G-mR-hca" firstAttribute="bottom" secondItem="1hV-Yu-JDn" secondAttribute="bottom" id="m7o-UG-swH"/>
+                            <constraint firstItem="k5G-mR-hca" firstAttribute="trailing" secondItem="1hV-Yu-JDn" secondAttribute="trailing" id="soi-iD-ndx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="k5G-mR-hca"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="1hV-Yu-JDn" id="c5J-Pf-4w1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQ4-37-qqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1766" y="30"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3EH-BD-hE9">

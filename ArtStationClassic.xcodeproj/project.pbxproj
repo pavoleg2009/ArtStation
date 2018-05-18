@@ -27,6 +27,7 @@
 		283B82F520AF2014006E76A8 /* FileNamager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283B82F420AF2014006E76A8 /* FileNamager.swift */; };
 		283B82F820AF2259006E76A8 /* projectsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 283B82F720AF2259006E76A8 /* projectsResponse.json */; };
 		283B82FA20AF55FF006E76A8 /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283B82F920AF55FF006E76A8 /* ProjectCell.swift */; };
+		283B82FC20AF6984006E76A8 /* ProjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283B82FB20AF6984006E76A8 /* ProjectDetailsViewController.swift */; };
 		2896A51F20AD89D300F3292A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A51E20AD89D300F3292A /* AppDelegate.swift */; };
 		2896A52120AD89D300F3292A /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A52020AD89D300F3292A /* ProjectsViewController.swift */; };
 		2896A52420AD89D300F3292A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2896A52220AD89D300F3292A /* Main.storyboard */; };
@@ -78,6 +79,7 @@
 		283B82F420AF2014006E76A8 /* FileNamager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNamager.swift; sourceTree = "<group>"; };
 		283B82F720AF2259006E76A8 /* projectsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = projectsResponse.json; sourceTree = "<group>"; };
 		283B82F920AF55FF006E76A8 /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		283B82FB20AF6984006E76A8 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsViewController.swift; sourceTree = "<group>"; };
 		2896A51B20AD89D300F3292A /* ArtStationClassic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtStationClassic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2896A51E20AD89D300F3292A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2896A52020AD89D300F3292A /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2896A52020AD89D300F3292A /* ProjectsViewController.swift */,
+				283B82FB20AF6984006E76A8 /* ProjectDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				2896A51F20AD89D300F3292A /* AppDelegate.swift in Sources */,
 				2896A55920ADA15B00F3292A /* AppColor.swift in Sources */,
 				281C2D4920ADD34700B9FF7A /* ProjectViewModel.swift in Sources */,
+				283B82FC20AF6984006E76A8 /* ProjectDetailsViewController.swift in Sources */,
 				281C2D2620ADB01600B9FF7A /* ApiManager.swift in Sources */,
 				281C2D4C20ADD5CC00B9FF7A /* ProjectServiceImpl.swift in Sources */,
 				28F8331C20ADA1C9002099C1 /* UIColor.swift in Sources */,
