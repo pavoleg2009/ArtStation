@@ -1,14 +1,5 @@
 import Foundation
 
-typealias SuccessCallback<ResponseType> = (_ response: ResponseType?, _ task: URLSessionTask?) -> Void
-typealias FailureCallback<ErrorType> = (_ error: ErrorType, _ task: URLSessionTask?) -> Void
-
-protocol ApiManager {
-    func makeRequest<T: Request>(request: T,
-                           onSuccess: @escaping SuccessCallback<T.ResponseType>,
-                           onFailure: @escaping FailureCallback<ApiError>) -> URLSessionTask?
-}
-
 final class ApiManagerImpl: ApiManager {
     
     // MARK: Dependencies
@@ -27,11 +18,11 @@ final class ApiManagerImpl: ApiManager {
     func makeRequest<T: Request>(request: T,
                                  onSuccess: @escaping SuccessCallback<T.ResponseType>,
                                  onFailure: @escaping FailureCallback<ApiError>) -> URLSessionTask? {
-
+        
         let urlRequest: URLRequest
         do {
             urlRequest = try request.urlRequest()
-//            print("\n=== urlRequest.url = \(urlRequest.url)\n")
+            //            print("\n=== urlRequest.url = \(urlRequest.url)\n")
         } catch {
             onFailure(ApiError.badRequest, nil)
             return nil
@@ -45,6 +36,7 @@ final class ApiManagerImpl: ApiManager {
                 print("==== Error: \(error.localizedDescription)")
                 onFailure(ApiError.badRequest, nil)
             } else if let data = data {
+                
                 do {
                     let result: T.ResponseType = try sself.parser.parse(data: data)
                     onSuccess(result, nil)
@@ -53,13 +45,12 @@ final class ApiManagerImpl: ApiManager {
                     // TODO: Add cutom parsing error
                     print("==== Parse Error: \(error.localizedDescription)")
                 }
- 
+                
             } else {
                 onFailure(ApiError.noData, nil)
             }
         }
         task.resume()
         return nil
-    }
-
+    }    
 }

@@ -13,16 +13,19 @@
 		281C2D3020ADB0FF00B9FF7A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D2F20ADB0FF00B9FF7A /* Response.swift */; };
 		281C2D3320ADB11500B9FF7A /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3220ADB11500B9FF7A /* ApiError.swift */; };
 		281C2D3620ADB14900B9FF7A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3520ADB14900B9FF7A /* Parser.swift */; };
-		281C2D3820ADB2F100B9FF7A /* ApiManagerAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3720ADB2F100B9FF7A /* ApiManagerAsyncTests.swift */; };
+		281C2D3820ADB2F100B9FF7A /* ApiManagerImplAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3720ADB2F100B9FF7A /* ApiManagerImplAsyncTests.swift */; };
 		281C2D3A20ADB34E00B9FF7A /* ProjectsGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3920ADB34E00B9FF7A /* ProjectsGetRequest.swift */; };
 		281C2D4020ADB55F00B9FF7A /* ProjectsRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3B20ADB55F00B9FF7A /* ProjectsRequestResponse.swift */; };
-		281C2D4120ADB55F00B9FF7A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3C20ADB55F00B9FF7A /* User.swift */; };
 		281C2D4220ADB55F00B9FF7A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3D20ADB55F00B9FF7A /* Project.swift */; };
-		281C2D4320ADB55F00B9FF7A /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3E20ADB55F00B9FF7A /* Icons.swift */; };
 		281C2D4420ADB55F00B9FF7A /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D3F20ADB55F00B9FF7A /* Cover.swift */; };
 		281C2D4720ADD2B100B9FF7A /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D4620ADD2B100B9FF7A /* ProjectService.swift */; };
 		281C2D4920ADD34700B9FF7A /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D4820ADD34700B9FF7A /* ProjectViewModel.swift */; };
 		281C2D4C20ADD5CC00B9FF7A /* ProjectServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D4B20ADD5CC00B9FF7A /* ProjectServiceImpl.swift */; };
+		281C2D6E20AF1D4D00B9FF7A /* ProjectsServiceImplTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D6D20AF1D4D00B9FF7A /* ProjectsServiceImplTests.swift */; };
+		283B82F120AF1E81006E76A8 /* ApiManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283B82F020AF1E81006E76A8 /* ApiManagerImpl.swift */; };
+		283B82F320AF1ECE006E76A8 /* ApiManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283B82F220AF1ECE006E76A8 /* ApiManagerMock.swift */; };
+		283B82F520AF2014006E76A8 /* FileNamager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283B82F420AF2014006E76A8 /* FileNamager.swift */; };
+		283B82F820AF2259006E76A8 /* projectsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 283B82F720AF2259006E76A8 /* projectsResponse.json */; };
 		2896A51F20AD89D300F3292A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A51E20AD89D300F3292A /* AppDelegate.swift */; };
 		2896A52120AD89D300F3292A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A52020AD89D300F3292A /* ViewController.swift */; };
 		2896A52420AD89D300F3292A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2896A52220AD89D300F3292A /* Main.storyboard */; };
@@ -60,16 +63,19 @@
 		281C2D2F20ADB0FF00B9FF7A /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		281C2D3220ADB11500B9FF7A /* ApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		281C2D3520ADB14900B9FF7A /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		281C2D3720ADB2F100B9FF7A /* ApiManagerAsyncTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManagerAsyncTests.swift; sourceTree = "<group>"; };
+		281C2D3720ADB2F100B9FF7A /* ApiManagerImplAsyncTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManagerImplAsyncTests.swift; sourceTree = "<group>"; };
 		281C2D3920ADB34E00B9FF7A /* ProjectsGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsGetRequest.swift; sourceTree = "<group>"; };
 		281C2D3B20ADB55F00B9FF7A /* ProjectsRequestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsRequestResponse.swift; sourceTree = "<group>"; };
-		281C2D3C20ADB55F00B9FF7A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		281C2D3D20ADB55F00B9FF7A /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		281C2D3E20ADB55F00B9FF7A /* Icons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		281C2D3F20ADB55F00B9FF7A /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
 		281C2D4620ADD2B100B9FF7A /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		281C2D4820ADD34700B9FF7A /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		281C2D4B20ADD5CC00B9FF7A /* ProjectServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServiceImpl.swift; sourceTree = "<group>"; };
+		281C2D6D20AF1D4D00B9FF7A /* ProjectsServiceImplTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsServiceImplTests.swift; sourceTree = "<group>"; };
+		283B82F020AF1E81006E76A8 /* ApiManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManagerImpl.swift; sourceTree = "<group>"; };
+		283B82F220AF1ECE006E76A8 /* ApiManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManagerMock.swift; sourceTree = "<group>"; };
+		283B82F420AF2014006E76A8 /* FileNamager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNamager.swift; sourceTree = "<group>"; };
+		283B82F720AF2259006E76A8 /* projectsResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = projectsResponse.json; sourceTree = "<group>"; };
 		2896A51B20AD89D300F3292A /* ArtStationClassic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtStationClassic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2896A51E20AD89D300F3292A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2896A52020AD89D300F3292A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				28F8331B20ADA1C9002099C1 /* UIColor.swift */,
+				283B82F420AF2014006E76A8 /* FileNamager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -141,8 +148,6 @@
 				281C2D3B20ADB55F00B9FF7A /* ProjectsRequestResponse.swift */,
 				281C2D3D20ADB55F00B9FF7A /* Project.swift */,
 				281C2D3F20ADB55F00B9FF7A /* Cover.swift */,
-				281C2D3E20ADB55F00B9FF7A /* Icons.swift */,
-				281C2D3C20ADB55F00B9FF7A /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				281C2D2520ADB01600B9FF7A /* ApiManager.swift */,
+				283B82F020AF1E81006E76A8 /* ApiManagerImpl.swift */,
 				281C2D3120ADB11500B9FF7A /* ApiError */,
 				281C2D2720ADB03100B9FF7A /* Protocols */,
 				281C2D2A20ADB04600B9FF7A /* Requests */,
@@ -218,6 +224,32 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		281C2D6B20AF1D1200B9FF7A /* ApiManagersTests */ = {
+			isa = PBXGroup;
+			children = (
+				281C2D3720ADB2F100B9FF7A /* ApiManagerImplAsyncTests.swift */,
+			);
+			path = ApiManagersTests;
+			sourceTree = "<group>";
+		};
+		281C2D6C20AF1D1D00B9FF7A /* ProjectServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				281C2D6D20AF1D4D00B9FF7A /* ProjectsServiceImplTests.swift */,
+				283B82F220AF1ECE006E76A8 /* ApiManagerMock.swift */,
+				283B82F720AF2259006E76A8 /* projectsResponse.json */,
+			);
+			path = ProjectServiceTests;
+			sourceTree = "<group>";
+		};
+		283B82F620AF20B5006E76A8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				281C2D2420ADAFF200B9FF7A /* ApiManager */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		2896A51220AD89D200F3292A = {
 			isa = PBXGroup;
 			children = (
@@ -239,13 +271,13 @@
 		2896A51D20AD89D300F3292A /* ArtStationClassic */ = {
 			isa = PBXGroup;
 			children = (
+				2896A55420AD9E7A00F3292A /* App */,
 				281C2D4520ADD27E00B9FF7A /* Services */,
-				281C2D2420ADAFF200B9FF7A /* ApiManager */,
+				283B82F620AF20B5006E76A8 /* Core */,
 				281C2D2320ADA95600B9FF7A /* Models */,
 				281C2D2220ADA94F00B9FF7A /* Views */,
 				281C2D4A20ADD36300B9FF7A /* ViewModels */,
 				281C2D2120ADA94500B9FF7A /* Controllers */,
-				2896A55420AD9E7A00F3292A /* App */,
 				2896A55620ADA13900F3292A /* Constants */,
 				281C2D2020ADA2B700B9FF7A /* Extensions */,
 				2896A53E20AD8D5F00F3292A /* Resources */,
@@ -257,7 +289,8 @@
 		2896A53220AD89D400F3292A /* ArtStationClassicTests */ = {
 			isa = PBXGroup;
 			children = (
-				281C2D3720ADB2F100B9FF7A /* ApiManagerAsyncTests.swift */,
+				281C2D6B20AF1D1200B9FF7A /* ApiManagersTests */,
+				281C2D6C20AF1D1D00B9FF7A /* ProjectServiceTests */,
 				2896A53520AD89D400F3292A /* Info.plist */,
 			);
 			path = ArtStationClassicTests;
@@ -418,6 +451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283B82F820AF2259006E76A8 /* projectsResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,15 +481,15 @@
 			files = (
 				281C2D2920ADB03100B9FF7A /* URLSessionProtocol.swift in Sources */,
 				281C2D4220ADB55F00B9FF7A /* Project.swift in Sources */,
-				281C2D4320ADB55F00B9FF7A /* Icons.swift in Sources */,
 				281C2D3620ADB14900B9FF7A /* Parser.swift in Sources */,
 				281C2D2D20ADB07100B9FF7A /* Request.swift in Sources */,
 				2896A55A20ADA15B00F3292A /* AppFont.swift in Sources */,
 				281C2D3320ADB11500B9FF7A /* ApiError.swift in Sources */,
 				281C2D4420ADB55F00B9FF7A /* Cover.swift in Sources */,
 				281C2D4020ADB55F00B9FF7A /* ProjectsRequestResponse.swift in Sources */,
-				281C2D4120ADB55F00B9FF7A /* User.swift in Sources */,
 				281C2D3A20ADB34E00B9FF7A /* ProjectsGetRequest.swift in Sources */,
+				283B82F520AF2014006E76A8 /* FileNamager.swift in Sources */,
+				283B82F120AF1E81006E76A8 /* ApiManagerImpl.swift in Sources */,
 				2896A52120AD89D300F3292A /* ViewController.swift in Sources */,
 				281C2D3020ADB0FF00B9FF7A /* Response.swift in Sources */,
 				2896A51F20AD89D300F3292A /* AppDelegate.swift in Sources */,
@@ -472,7 +506,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				281C2D3820ADB2F100B9FF7A /* ApiManagerAsyncTests.swift in Sources */,
+				281C2D3820ADB2F100B9FF7A /* ApiManagerImplAsyncTests.swift in Sources */,
+				283B82F320AF1ECE006E76A8 /* ApiManagerMock.swift in Sources */,
+				281C2D6E20AF1D4D00B9FF7A /* ProjectsServiceImplTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

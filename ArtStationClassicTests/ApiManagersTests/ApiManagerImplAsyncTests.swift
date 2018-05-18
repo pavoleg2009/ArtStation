@@ -1,9 +1,9 @@
 import XCTest
 @testable import ArtStationClassic
 
-class ApiManagerAsyncTests: XCTestCase {
+class ApiManagerAsyncImplTests: XCTestCase {
     
-    var sutApiManager: ApiManager!
+    var sutApiManager: ApiManagerImpl!
     
     override func setUp() {
         super.setUp()
@@ -26,17 +26,18 @@ class ApiManagerAsyncTests: XCTestCase {
         // ACT
         let _ = sutApiManager.makeRequest(request: testRequest, onSuccess: { (response, task) in
             
-            print("\n===\n")
             receivedResponse = response
             promise.fulfill()
+            
         }) { (apiError, task) in
+            
             XCTFail()
             promise.fulfill()
             print("==== sutApiManager.makeRequest callback FAILURE: \(apiError.localizedDescription)")
         }
-        waitForExpectations(timeout: 5)
-        // ASSERT
         
+        // ASSERT
+        waitForExpectations(timeout: 5)
         XCTAssertEqual(receivedResponse?.projects?.count, expectedProjectsCount)
     }
     
