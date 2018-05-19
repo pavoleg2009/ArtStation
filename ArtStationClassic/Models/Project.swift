@@ -6,6 +6,7 @@ struct Project : Codable {
 	let coverAssetID: Int?
 	let permalink: String?
 	let cover: Cover?
+    let icons: Icons?
 
 	enum CodingKeys: String, CodingKey {
 		case id
@@ -13,7 +14,7 @@ struct Project : Codable {
 		case coverAssetID = "cover_asset_id"
 		case permalink = "permalink"
 		case cover
-
+        case icons
 	}
 
 	init(from decoder: Decoder) throws {
@@ -23,7 +24,8 @@ struct Project : Codable {
 		title = try values.decodeIfPresent(String.self, forKey: .title)
 		coverAssetID = try values.decodeIfPresent(Int.self, forKey: .coverAssetID)
 		permalink = try values.decodeIfPresent(String.self, forKey: .permalink)
-		cover = try values.decodeIfPresent(Cover.self, forKey: .cover) // Cover(from: decoder)
+		cover = try values.decodeIfPresent(Cover.self, forKey: .cover)
+        icons = try values.decodeIfPresent(Icons.self, forKey: .icons)
 	}
 
 }

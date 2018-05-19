@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2817F5C620B0BD640066614D /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2817F5C520B0BD640066614D /* Icons.swift */; };
 		281C2D2620ADB01600B9FF7A /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D2520ADB01600B9FF7A /* ApiManager.swift */; };
 		281C2D2920ADB03100B9FF7A /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D2820ADB03100B9FF7A /* URLSessionProtocol.swift */; };
 		281C2D2D20ADB07100B9FF7A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C2D2C20ADB07100B9FF7A /* Request.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2817F5C520B0BD640066614D /* Icons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		281C2D2520ADB01600B9FF7A /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		281C2D2820ADB03100B9FF7A /* URLSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		281C2D2C20ADB07100B9FF7A /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				281C2D3B20ADB55F00B9FF7A /* ProjectsRequestResponse.swift */,
 				281C2D3D20ADB55F00B9FF7A /* Project.swift */,
 				281C2D3F20ADB55F00B9FF7A /* Cover.swift */,
+				2817F5C520B0BD640066614D /* Icons.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				281C2D4920ADD34700B9FF7A /* ProjectViewModel.swift in Sources */,
 				28A3A19020B09C1A0006415F /* ImageDecompressionOperation.swift in Sources */,
 				28A3A18420B080FD0006415F /* AsyncOperation.swift in Sources */,
+				2817F5C620B0BD640066614D /* Icons.swift in Sources */,
 				283B82FC20AF6984006E76A8 /* ProjectDetailsViewController.swift in Sources */,
 				281C2D2620ADB01600B9FF7A /* ApiManager.swift in Sources */,
 				28A3A18020B07FB70006415F /* ImageProvider.swift in Sources */,

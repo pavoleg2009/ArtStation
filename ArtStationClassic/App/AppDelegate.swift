@@ -8,7 +8,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         print("\nDocDir: \(FileManager.op_documentDirectory)\n")
-        
+        UIApplication.shared.statusBarStyle = .lightContent
+
         return true
     }
 }

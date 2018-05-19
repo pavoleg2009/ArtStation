@@ -20,8 +20,8 @@ final class ProjectServiceImpl: ProjectService {
                 if let responseRoot = responseRoot,
                     let fetchedProjects = responseRoot.projects {
                     let projects = sself.mapApiResponseToProjects(fetchedProjects: fetchedProjects)
-                    
                     completion(projects)
+                    
                 } else {
                     print("==== API REPONSE: Incorrect data in response")
                     completion(nil)
@@ -36,6 +36,17 @@ final class ProjectServiceImpl: ProjectService {
 }
 
 extension ProjectServiceImpl {
+    
+    private func mapIconsToOptionSet(icons: Icons) -> IconsOptions {
+        var options: IconsOptions = []
+        if icons.image ?? false { options.insert(.image)}
+        if icons.video ?? false { options.insert(.video)}
+        if icons.model3d ?? false { options.insert(.model3d)}
+        if icons.marmoset ?? false { options.insert(.marmoset)}
+        if icons.pano ?? false { options.insert(.pano)}
+        
+        return options
+    }
     
     private func mapApiResponseToProjects(fetchedProjects: [Project]) -> [ProjectViewModel] {
         var projectsViewModels: [ProjectViewModel] = []
@@ -53,11 +64,19 @@ extension ProjectServiceImpl {
                     continue
             }
             
+            let options: IconsOptions
+            if let icons = fetchedProject.icons {
+                options = mapIconsToOptionSet(icons: icons)
+            } else {
+                options = []
+            }
+            
             let projectViewModel = ProjectViewModel(
                 id: id,
+                title: fetchedProject.title ?? "",
                 imageLink: imageUrl,
-                image: nil,
-                detailLink: detailLink)
+                detailLink: detailLink,
+                iconOptions: options)
             
             projectsViewModels.append(projectViewModel)
         }

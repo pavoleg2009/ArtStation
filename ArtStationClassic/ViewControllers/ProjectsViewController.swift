@@ -16,48 +16,36 @@ final class ProjectsViewController: UIViewController {
         static let cellsSpacing: CGFloat = 4.0
     }
     
-    var columns: CGFloat = 3.0 {
+    var columns: CGFloat = 2.0 {
         didSet {
             configure(collectionView,
                       forCellsInRow: columns,
                       withSpacing: Consts.cellsSpacing)
-//            collectionView.reloadData()
-            print(columns)
         }
     }
     
     private let projectService: ProjectService = ProjectServiceImpl()
     private var projectViewModels: [ProjectViewModel] = []
     private var nextPage = 1
-//    private var pagesInPrefetching: Set<Int> = []
     private var selectedProjectViewModel: ProjectViewModel?
     private var activeTask: URLSessionTask?
     
     private var imageProviders: Set<ImageProviderImpl> = []
     
-    private func beginUpdates() {
-        collectionView.refreshControl?.beginRefreshing()
-    }
-    
-    private func endUpdates() {
-        // hide spinner, unblock UI
-        activeTask = nil
-        collectionView.reloadData()
-        collectionView.refreshControl?.endRefreshing()
-    }
-    
-    private func setRefreshControl(for collectionView: UICollectionView, with selector: Selector) {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: selector, for: .valueChanged)
-        collectionView.refreshControl = refreshControl
+    // MARK: - Actions
+    @IBAction func zoomIn(_ sender: UIBarButtonItem) {
+        columns = (columns == 1.0)
+            ? Consts.maxColumns
+            : columns - 1
     }
     
     @objc private func refreshControlDidFire() {
-        print("== refresh controle fired")
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
     }
     
+    // MARK: Instance Methods
+
     private func configure(_ collectionView: UICollectionView,
                            forCellsInRow cellsInRow: CGFloat,
                            withSpacing spacing: CGFloat) {
@@ -89,6 +77,17 @@ final class ProjectsViewController: UIViewController {
         }
     }
     
+    private func beginUpdates() {
+        collectionView.refreshControl?.beginRefreshing()
+    }
+    
+    private func endUpdates() {
+        // hide spinner, unblock UI
+        activeTask = nil
+        collectionView.reloadData()
+        collectionView.refreshControl?.endRefreshing()
+    }
+    
     private func setNavigaionItemTitle(with image: UIImage?) {
         let imageView: UIImageView!
         if #available(iOS 11, *) {
@@ -103,43 +102,26 @@ final class ProjectsViewController: UIViewController {
         
         navigationItem.titleView = imageView
     }
-    
-    @IBAction func zoomIn(_ sender: UIBarButtonItem) {
-        columns = (columns == 1.0)
-            ? Consts.maxColumns
-            : columns - 1
-    }
 
     private func setupNavbar() {
         setNavigaionItemTitle(with: UIImage(named: "LogoHorisontal"))
         navigationController?.navigationBar.tintColor = AppColor.brandPrimary
     }
+    
+    private func setRefreshControl(for collectionView: UICollectionView, with selector: Selector) {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: selector, for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
 }
 
-// MARK: View Lifecycle
+// MARK: Overrides
 extension ProjectsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavbar()
         setRefreshControl(for: collectionView, with: #selector(refreshControlDidFire))
         fetchProjects()
-    }
-    
-}
-
-// MARK: UICollectionViewDataSource
-extension ProjectsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return projectViewModels.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Consts.cellReuseIdenrtifier, for: indexPath) as? ProjectCell else { fatalError("==== Wrong cell type")}
-        let projectViewModel = projectViewModels[indexPath.item]
-        cell.configure(with: projectViewModel)
-        
-        return cell
     }
     
     override func viewWillLayoutSubviews() {
@@ -155,9 +137,37 @@ extension ProjectsViewController: UICollectionViewDataSource {
             
             guard let selectedProjectViewModel = selectedProjectViewModel else { return }
             viewController.detailLink = selectedProjectViewModel.detailLink
+            viewController.projectViewModel = selectedProjectViewModel
         }
-        
     }
+    
+}
+
+// MARK: UICollectionViewDataSource
+extension ProjectsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return projectViewModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Consts.cellReuseIdenrtifier, for: indexPath) as? ProjectCell else { fatalError("==== Wrong cell type")}
+        let projectViewModel = projectViewModels[indexPath.item]
+        
+        let minColCountToShowIcons: CGFloat = 2.0
+        cell.configure(with: projectViewModel, showAdditionaInfo: columns <= minColCountToShowIcons)
+        
+        let imageProvider = ImageProviderImpl(url: projectViewModel.imageLink) {
+            image in
+            OperationQueue.main.addOperation {
+                cell.updateImageViewWithImage(image)
+            }
+        }
+        imageProviders.insert(imageProvider)
+        
+        return cell
+    }
+    
 }
 
 // MARK: UICollectionViewDelegate
@@ -170,18 +180,18 @@ extension ProjectsViewController: UICollectionViewDelegate {
         performSegue(withIdentifier: Consts.detailSegueIdentifier, sender: nil)
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? ProjectCell else { return }
-        let projectViewModel = projectViewModels[indexPath.item]
-        cell.configure(with: projectViewModel)
-        
-        let imageProvider = ImageProviderImpl(url: projectViewModel.imageLink) {
-            image in
-            OperationQueue.main.addOperation {
-                cell.updateImageViewWithImage(image)
-            }
-        }
-        imageProviders.insert(imageProvider)
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        guard let cell = cell as? ProjectCell else { return }
+//
+//
+//    }
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        guard let cell = cell as? ProjectCell else { return }
+//
+//        for provider in imageProviders.filter({ $0.url == cell.projectViewModel.imageLink }) {
+//            provider.cancel()
+//            imageProviders.remove(provider)
+//            print("=== remove provider for: \(provider.url.lastPathComponent)")
+//        }
+//    }
 }

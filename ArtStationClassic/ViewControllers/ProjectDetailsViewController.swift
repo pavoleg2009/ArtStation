@@ -8,6 +8,7 @@ class ProjectDetailsViewController: UIViewController {
     var webView: WKWebView!
     var activityIndicator: UIActivityIndicatorView!
     var detailLink: URL?
+    var projectViewModel: ProjectViewModel!
     
     private func loadProjectDetails(from url: URL, to webView: WKWebView) {
         let myRequest = URLRequest(url: url)
@@ -28,7 +29,6 @@ class ProjectDetailsViewController: UIViewController {
             ])
         webView.backgroundColor = AppColor.brandBlack
         webView.scrollView.backgroundColor = AppColor.brandBlack
-        
     }
     
     private func createActivityIndicator() {
@@ -44,7 +44,17 @@ class ProjectDetailsViewController: UIViewController {
         activityIndicator.color = AppColor.brandPrimary
     }
     
+    private func setTitle() {
+        let titleMaxCharCount = 18
+        let titleStr = projectViewModel.title
+        self.title = (titleStr.count > titleMaxCharCount)
+            ? "\(String(titleStr.prefix(titleMaxCharCount)))..."
+            : titleStr
+    }
+    
+    
     override func viewDidLoad() {
+        setTitle()
         createWebView()
         createActivityIndicator()
     }
@@ -55,7 +65,6 @@ class ProjectDetailsViewController: UIViewController {
         if let detailLink = detailLink {
             loadProjectDetails(from: detailLink, to: webView)
         }
-        
     }
 
 }

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,6 +43,46 @@
                                                     <rect key="frame" x="40.5" y="40" width="20" height="20"/>
                                                     <color key="color" red="0.14901960780000001" green="0.69019607839999997" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </activityIndicatorView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="02b-6J-iSR">
+                                                    <rect key="frame" x="4" y="4" width="98" height="18"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="8vG-As-tB7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                                                            <color key="tintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="8vG-As-tB7" secondAttribute="height" multiplier="1:1" id="tSE-dw-wjx"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video" translatesAutoresizingMaskIntoConstraints="NO" id="PK9-p1-pTu">
+                                                            <rect key="frame" x="22" y="0.0" width="16" height="16"/>
+                                                            <color key="tintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="PK9-p1-pTu" secondAttribute="height" multiplier="1:1" id="6tB-Kc-2UV"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="model3d" translatesAutoresizingMaskIntoConstraints="NO" id="bER-2W-Gtu">
+                                                            <rect key="frame" x="42" y="0.0" width="16" height="16"/>
+                                                            <color key="tintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="bER-2W-Gtu" secondAttribute="height" multiplier="1:1" id="KHF-BL-stc"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marmoset" translatesAutoresizingMaskIntoConstraints="NO" id="Pt8-Yg-gTO">
+                                                            <rect key="frame" x="62" y="0.0" width="16" height="16"/>
+                                                            <color key="tintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Pt8-Yg-gTO" secondAttribute="height" multiplier="1:1" id="Hq7-Tt-Kop"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pano" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-iM-Axw">
+                                                            <rect key="frame" x="82" y="0.0" width="16" height="16"/>
+                                                            <color key="tintColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="yVa-iM-Axw" secondAttribute="height" multiplier="1:1" id="8nQ-vd-3FK"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,12 +91,25 @@
                                             <constraint firstAttribute="bottom" secondItem="2Jc-hx-XeL" secondAttribute="bottom" id="4N5-Ar-rJa"/>
                                             <constraint firstAttribute="trailing" secondItem="2Jc-hx-XeL" secondAttribute="trailing" id="8sT-Xa-lQe"/>
                                             <constraint firstItem="maD-er-jRw" firstAttribute="centerY" secondItem="2Jc-hx-XeL" secondAttribute="centerY" id="NFK-Tr-duZ"/>
+                                            <constraint firstItem="02b-6J-iSR" firstAttribute="top" secondItem="gKb-3i-8s5" secondAttribute="top" constant="4" id="j9d-ci-HCa"/>
                                             <constraint firstItem="maD-er-jRw" firstAttribute="centerX" secondItem="2Jc-hx-XeL" secondAttribute="centerX" id="pfu-XZ-jyT"/>
+                                            <constraint firstItem="02b-6J-iSR" firstAttribute="leading" secondItem="gKb-3i-8s5" secondAttribute="leading" constant="4" id="tZT-NE-z67"/>
                                             <constraint firstItem="2Jc-hx-XeL" firstAttribute="leading" secondItem="gKb-3i-8s5" secondAttribute="leading" id="wGB-Ny-6ms"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="activityIndicator" destination="maD-er-jRw" id="y4a-js-oFp"/>
+                                            <outlet property="iconStack" destination="02b-6J-iSR" id="Uxx-jY-z2I"/>
+                                            <outlet property="imageIcon" destination="8vG-As-tB7" id="Aam-Fz-IS4"/>
                                             <outlet property="imageView" destination="2Jc-hx-XeL" id="frX-HS-5Zp"/>
+                                            <outlet property="marmosetIcon" destination="Pt8-Yg-gTO" id="10H-1F-DMU"/>
+                                            <outlet property="model3dIcon" destination="bER-2W-Gtu" id="FhX-da-cuh"/>
+                                            <outlet property="panoIcon" destination="yVa-iM-Axw" id="WUS-8q-M05"/>
+                                            <outlet property="videoIcon" destination="PK9-p1-pTu" id="lQl-8v-N4B"/>
+                                            <outletCollection property="icons" destination="8vG-As-tB7" collectionClass="NSMutableArray" id="zIP-Lu-eyr"/>
+                                            <outletCollection property="icons" destination="PK9-p1-pTu" collectionClass="NSMutableArray" id="oFk-v0-5Wv"/>
+                                            <outletCollection property="icons" destination="bER-2W-Gtu" collectionClass="NSMutableArray" id="a7z-rM-tXd"/>
+                                            <outletCollection property="icons" destination="Pt8-Yg-gTO" collectionClass="NSMutableArray" id="My4-MF-PJf"/>
+                                            <outletCollection property="icons" destination="yVa-iM-Axw" collectionClass="NSMutableArray" id="OG7-uz-5y6"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -89,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="30.134932533733135"/>
+            <point key="canvasLocation" x="963.75" y="29.577464788732396"/>
         </scene>
         <!--Project Details View Controller-->
         <scene sceneID="M7M-9l-01r">
@@ -146,7 +200,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="image" width="18" height="16"/>
+        <image name="marmoset" width="16" height="16"/>
+        <image name="model3d" width="16" height="16"/>
+        <image name="pano" width="16" height="16"/>
         <image name="small_square-placehholder" width="640" height="640"/>
+        <image name="video" width="16" height="16"/>
         <image name="zoom-in" width="16" height="16"/>
     </resources>
 </document>
