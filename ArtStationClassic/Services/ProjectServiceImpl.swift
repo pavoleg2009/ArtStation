@@ -8,11 +8,11 @@ final class ProjectServiceImpl: ProjectService {
         self.apiManager = apiManager
     }
     
-    func fetchProjects(page: Int, completion: @escaping FetchProjectCompletion) {
+    func fetchProjects(page: Int, completion: @escaping FetchProjectCompletion) -> URLSessionDataTask? {
         
         let request = ProjectsGetRequest(page: page)
         
-        _ = apiManager.makeRequest(
+        let task = apiManager.makeRequest(
             request: request,
             onSuccess: { [weak self] (responseRoot, task) in
                 guard let sself = self else { return }
@@ -31,6 +31,7 @@ final class ProjectServiceImpl: ProjectService {
                 print("==== API ERROR: \(error.localizedDescription)")
                 completion(nil)
         })
+        return task
     }
 }
 

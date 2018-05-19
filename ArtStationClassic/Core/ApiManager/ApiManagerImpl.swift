@@ -17,7 +17,7 @@ final class ApiManagerImpl: ApiManager {
     @discardableResult
     func makeRequest<T: Request>(request: T,
                                  onSuccess: @escaping SuccessCallback<T.ResponseType>,
-                                 onFailure: @escaping FailureCallback<ApiError>) -> URLSessionTask? {
+                                 onFailure: @escaping FailureCallback<ApiError>) -> URLSessionDataTask? {
         
         let urlRequest: URLRequest
         do {
@@ -51,6 +51,6 @@ final class ApiManagerImpl: ApiManager {
             }
         }
         task.resume()
-        return nil
+        return task
     }    
 }

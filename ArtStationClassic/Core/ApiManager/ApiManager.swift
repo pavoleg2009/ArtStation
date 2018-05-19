@@ -6,5 +6,5 @@ typealias FailureCallback<ErrorType> = (_ error: ErrorType, _ task: URLSessionTa
 protocol ApiManager {
     func makeRequest<T: Request>(request: T,
                            onSuccess: @escaping SuccessCallback<T.ResponseType>,
-                           onFailure: @escaping FailureCallback<ApiError>) -> URLSessionTask?
+                           onFailure: @escaping FailureCallback<ApiError>) -> URLSessionDataTask?
 }

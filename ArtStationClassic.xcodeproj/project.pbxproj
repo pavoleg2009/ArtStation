@@ -45,6 +45,14 @@
 		2896A55320AD8D8C00F3292A /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2896A54920AD8D8B00F3292A /* OpenSans-SemiboldItalic.ttf */; };
 		2896A55920ADA15B00F3292A /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A55720ADA15B00F3292A /* AppColor.swift */; };
 		2896A55A20ADA15B00F3292A /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A55820ADA15B00F3292A /* AppFont.swift */; };
+		28A3A17E20B0622C0006415F /* ImageLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A17D20B0622C0006415F /* ImageLoaderProtocol.swift */; };
+		28A3A18020B07FB70006415F /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A17F20B07FB70006415F /* ImageProvider.swift */; };
+		28A3A18420B080FD0006415F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18320B080FD0006415F /* AsyncOperation.swift */; };
+		28A3A18620B083590006415F /* DataLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18520B083590006415F /* DataLoadOperation.swift */; };
+		28A3A18820B085320006415F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18720B085320006415F /* NetworkManager.swift */; };
+		28A3A18B20B08AD50006415F /* ImageOutputOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18A20B08AD50006415F /* ImageOutputOperation.swift */; };
+		28A3A18D20B08B1E0006415F /* ImageProcessingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18C20B08B1E0006415F /* ImageProcessingOperation.swift */; };
+		28A3A19020B09C1A0006415F /* ImageDecompressionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18F20B09C1A0006415F /* ImageDecompressionOperation.swift */; };
 		28F8331C20ADA1C9002099C1 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F8331B20ADA1C9002099C1 /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +109,14 @@
 		2896A54920AD8D8B00F3292A /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		2896A55720ADA15B00F3292A /* AppColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		2896A55820ADA15B00F3292A /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		28A3A17D20B0622C0006415F /* ImageLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderProtocol.swift; sourceTree = "<group>"; };
+		28A3A17F20B07FB70006415F /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		28A3A18320B080FD0006415F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		28A3A18520B083590006415F /* DataLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadOperation.swift; sourceTree = "<group>"; };
+		28A3A18720B085320006415F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		28A3A18A20B08AD50006415F /* ImageOutputOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOutputOperation.swift; sourceTree = "<group>"; };
+		28A3A18C20B08B1E0006415F /* ImageProcessingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingOperation.swift; sourceTree = "<group>"; };
+		28A3A18F20B09C1A0006415F /* ImageDecompressionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDecompressionOperation.swift; sourceTree = "<group>"; };
 		28F8331B20ADA1C9002099C1 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,19 +147,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		281C2D2120ADA94500B9FF7A /* Controllers */ = {
+		281C2D2120ADA94500B9FF7A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				2896A52020AD89D300F3292A /* ProjectsViewController.swift */,
 				283B82FB20AF6984006E76A8 /* ProjectDetailsViewController.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		281C2D2220ADA94F00B9FF7A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				283B82F920AF55FF006E76A8 /* ProjectCell.swift */,
+				28A3A17D20B0622C0006415F /* ImageLoaderProtocol.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +235,7 @@
 			children = (
 				281C2D4620ADD2B100B9FF7A /* ProjectService.swift */,
 				281C2D4B20ADD5CC00B9FF7A /* ProjectServiceImpl.swift */,
+				28A3A17F20B07FB70006415F /* ImageProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -252,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				281C2D2420ADAFF200B9FF7A /* ApiManager */,
+				28A3A18920B085370006415F /* NetworkManager */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -281,8 +300,9 @@
 				281C2D2320ADA95600B9FF7A /* Models */,
 				281C2D2220ADA94F00B9FF7A /* Views */,
 				281C2D4A20ADD36300B9FF7A /* ViewModels */,
-				281C2D2120ADA94500B9FF7A /* Controllers */,
+				281C2D2120ADA94500B9FF7A /* ViewControllers */,
 				281C2D4520ADD27E00B9FF7A /* Services */,
+				28A3A18120B0809D0006415F /* Operations */,
 				283B82F620AF20B5006E76A8 /* Core */,
 				2896A55620ADA13900F3292A /* Constants */,
 				281C2D2020ADA2B700B9FF7A /* Extensions */,
@@ -353,6 +373,34 @@
 				2896A55820ADA15B00F3292A /* AppFont.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		28A3A18120B0809D0006415F /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				28A3A18E20B08B470006415F /* Abstract */,
+				28A3A18520B083590006415F /* DataLoadOperation.swift */,
+				28A3A18F20B09C1A0006415F /* ImageDecompressionOperation.swift */,
+				28A3A18A20B08AD50006415F /* ImageOutputOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		28A3A18920B085370006415F /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				28A3A18720B085320006415F /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		28A3A18E20B08B470006415F /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				28A3A18320B080FD0006415F /* AsyncOperation.swift */,
+				28A3A18C20B08B1E0006415F /* ImageProcessingOperation.swift */,
+			);
+			path = Abstract;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,7 +533,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28A3A18820B085320006415F /* NetworkManager.swift in Sources */,
 				281C2D2920ADB03100B9FF7A /* URLSessionProtocol.swift in Sources */,
+				28A3A18B20B08AD50006415F /* ImageOutputOperation.swift in Sources */,
 				281C2D4220ADB55F00B9FF7A /* Project.swift in Sources */,
 				281C2D3620ADB14900B9FF7A /* Parser.swift in Sources */,
 				281C2D2D20ADB07100B9FF7A /* Request.swift in Sources */,
@@ -498,13 +548,19 @@
 				283B82FA20AF55FF006E76A8 /* ProjectCell.swift in Sources */,
 				283B82F120AF1E81006E76A8 /* ApiManagerImpl.swift in Sources */,
 				2896A52120AD89D300F3292A /* ProjectsViewController.swift in Sources */,
+				28A3A18620B083590006415F /* DataLoadOperation.swift in Sources */,
 				281C2D3020ADB0FF00B9FF7A /* Response.swift in Sources */,
 				2896A51F20AD89D300F3292A /* AppDelegate.swift in Sources */,
+				28A3A17E20B0622C0006415F /* ImageLoaderProtocol.swift in Sources */,
 				2896A55920ADA15B00F3292A /* AppColor.swift in Sources */,
 				281C2D4920ADD34700B9FF7A /* ProjectViewModel.swift in Sources */,
+				28A3A19020B09C1A0006415F /* ImageDecompressionOperation.swift in Sources */,
+				28A3A18420B080FD0006415F /* AsyncOperation.swift in Sources */,
 				283B82FC20AF6984006E76A8 /* ProjectDetailsViewController.swift in Sources */,
 				281C2D2620ADB01600B9FF7A /* ApiManager.swift in Sources */,
+				28A3A18020B07FB70006415F /* ImageProvider.swift in Sources */,
 				281C2D4C20ADD5CC00B9FF7A /* ProjectServiceImpl.swift in Sources */,
+				28A3A18D20B08B1E0006415F /* ImageProcessingOperation.swift in Sources */,
 				28F8331C20ADA1C9002099C1 /* UIColor.swift in Sources */,
 				281C2D4720ADD2B100B9FF7A /* ProjectService.swift in Sources */,
 			);
@@ -601,7 +657,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -655,7 +711,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
