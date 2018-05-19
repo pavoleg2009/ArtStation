@@ -27,6 +27,7 @@ final class ProjectsViewController: UIViewController {
     private let projectService: ProjectService = ProjectServiceImpl()
     private var projectViewModels: [ProjectViewModel] = []
     private var nextPage = 1
+    private var fetchingPages: Set<Int> = []
     private var selectedProjectViewModel: ProjectViewModel?
     private var activeTask: URLSessionTask?
     
@@ -58,22 +59,37 @@ final class ProjectsViewController: UIViewController {
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
     }
     
+    private func refresh() {
+        fetchingPages = []
+        projectViewModels = []
+        nextPage = 1
+        fetchProjects()
+    }
+    
     private func fetchProjects() {
         beginUpdates()
+        fetchingPages.insert(nextPage)
+        print("fethc page: \(nextPage)")
         activeTask = projectService.fetchProjects(page: nextPage) {
             [weak self] (fetchedProjectViewModels) in
             
             guard let sself = self else { return }
             
             if let fetchedProjectViewModels = fetchedProjectViewModels {
-                sself.projectViewModels = fetchedProjectViewModels
-                
+                sself.projectViewModels.append(contentsOf: fetchedProjectViewModels)
+                sself.nextPage += 1
             } else {
                 // show error message
             }
             DispatchQueue.main.async {
                 sself.endUpdates()
             }
+        }
+    }
+    
+    private func fetchNextPage() {
+        if !fetchingPages.contains(nextPage) {
+            fetchProjects()
         }
     }
     
@@ -121,7 +137,7 @@ extension ProjectsViewController {
         super.viewDidLoad()
         setupNavbar()
         setRefreshControl(for: collectionView, with: #selector(refreshControlDidFire))
-        fetchProjects()
+        refresh()
     }
     
     override func viewWillLayoutSubviews() {
@@ -152,6 +168,13 @@ extension ProjectsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Consts.cellReuseIdenrtifier, for: indexPath) as? ProjectCell else { fatalError("==== Wrong cell type")}
+        
+        let prefetchThreshhold = Int(columns) * 5
+        print("Count: \(projectViewModels.count) Item: \(indexPath.item) prefetchThreshhold \(prefetchThreshhold)")
+        if (projectViewModels.count - indexPath.item) < prefetchThreshhold {
+            fetchNextPage()
+        }
+        
         let projectViewModel = projectViewModels[indexPath.item]
         
         let minColCountToShowIcons: CGFloat = 2.0
