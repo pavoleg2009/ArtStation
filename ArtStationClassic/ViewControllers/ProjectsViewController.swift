@@ -16,7 +16,7 @@ final class ProjectsViewController: UIViewController {
         static let cellsSpacing: CGFloat = 4.0
     }
     
-    var columns: CGFloat = 2.0 {
+    var columns: CGFloat = 3.0 {
         didSet {
             configure(collectionView,
                       forCellsInRow: columns,
@@ -41,7 +41,7 @@ final class ProjectsViewController: UIViewController {
     }
     
     @objc private func refreshControlDidFire() {
-        collectionView.reloadData()
+        refresh()
         collectionView.refreshControl?.endRefreshing()
     }
     
@@ -61,7 +61,6 @@ final class ProjectsViewController: UIViewController {
     
     private func refresh() {
         fetchingPages = []
-        projectViewModels = []
         nextPage = 1
         fetchProjects()
     }
@@ -76,7 +75,11 @@ final class ProjectsViewController: UIViewController {
             guard let sself = self else { return }
             
             if let fetchedProjectViewModels = fetchedProjectViewModels {
-                sself.projectViewModels.append(contentsOf: fetchedProjectViewModels)
+                if sself.nextPage == 1 {
+                    sself.projectViewModels = fetchedProjectViewModels
+                } else {
+                    sself.projectViewModels.append(contentsOf: fetchedProjectViewModels)
+                }
                 sself.nextPage += 1
             } else {
                 // show error message
@@ -157,6 +160,10 @@ extension ProjectsViewController {
         }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let verticalIndicator = scrollView.subviews.last as? UIImageView
+        verticalIndicator?.backgroundColor = AppColor.brandPrimary
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -180,13 +187,13 @@ extension ProjectsViewController: UICollectionViewDataSource {
         let minColCountToShowIcons: CGFloat = 2.0
         cell.configure(with: projectViewModel, showAdditionaInfo: columns <= minColCountToShowIcons)
         
-        let imageProvider = ImageProviderImpl(url: projectViewModel.imageLink) {
-            image in
-            OperationQueue.main.addOperation {
-                cell.updateImageViewWithImage(image)
-            }
-        }
-        imageProviders.insert(imageProvider)
+//        let imageProvider = ImageProviderImpl(url: projectViewModel.imageLink) {
+//            image in
+//            OperationQueue.main.addOperation {
+//                cell.updateImageViewWithImage(image)
+//            }
+//        }
+//        imageProviders.insert(imageProvider)
         
         return cell
     }
