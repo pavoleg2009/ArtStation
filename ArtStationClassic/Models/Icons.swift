@@ -1,4 +1,5 @@
 import Foundation
+
 struct Icons : Codable {
 	let image : Bool?
 	let video : Bool?
@@ -7,7 +8,6 @@ struct Icons : Codable {
 	let pano : Bool?
 
 	enum CodingKeys: String, CodingKey {
-
 		case image = "image"
 		case video = "video"
 		case model3d = "model3d"

@@ -1,10 +1,10 @@
 import Foundation
+
 struct ProjectsRequestResponse : Response {
 	let projects : [Project]?
 	let totalCount : Int?
 
 	enum CodingKeys: String, CodingKey {
-
 		case projects = "data"
 		case totalCount = "total_count"
 	}

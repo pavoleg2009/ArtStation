@@ -55,10 +55,16 @@ extension ProjectServiceImpl {
             
             guard
                 let id = fetchedProject.id,
-                let imageUrlString = fetchedProject.cover?.smallSquareURL,
-                let imageUrl = URL(string: imageUrlString),
                 let detailLinkString = fetchedProject.permalink,
-                let detailLink = URL(string: detailLinkString)
+                let detailLink = URL(string: detailLinkString),
+                // covers
+                let image200LinkString = fetchedProject.cover?.microSquareImageURL,
+                let image200Link = URL(string: image200LinkString),
+                let image400LinkString = fetchedProject.cover?.thumbURL,
+                let image400Link = URL(string: image400LinkString),
+                let image800LinkString = fetchedProject.cover?.smallSquareURL,
+                let image800Link = URL(string: image800LinkString)
+            
                 else {
                     print("=== ⏭ skipped project # \(index) projectID: \(fetchedProject.id ?? -1)")
                     continue
@@ -74,7 +80,9 @@ extension ProjectServiceImpl {
             let projectViewModel = ProjectViewModel(
                 id: id,
                 title: fetchedProject.title ?? "",
-                imageLink: imageUrl,
+                image200Link: image200Link,
+                image400Link: image400Link,
+                image800Link: image800Link,
                 detailLink: detailLink,
                 iconOptions: options)
             

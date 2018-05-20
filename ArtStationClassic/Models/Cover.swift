@@ -29,5 +29,4 @@ struct Cover : Codable {
 		microSquareImageURL = try values.decodeIfPresent(String.self, forKey: .microSquareImageURL)
 		aspect = try values.decodeIfPresent(Double.self, forKey: .aspect)
 	}
-
 }

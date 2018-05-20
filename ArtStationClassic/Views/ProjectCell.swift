@@ -1,17 +1,8 @@
-//
-//  ProjectCell.swift
-//  ArtStationClassic
-//
-//  Created by Oleg Pavlichenkov on 18/05/2018.
-//  Copyright © 2018 Oleg Pavlichenkov. All rights reserved.
-//
-
 import UIKit
 
 class ProjectCell: UICollectionViewCell {
     
     // MARK: Outlets
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -21,7 +12,6 @@ class ProjectCell: UICollectionViewCell {
     @IBOutlet weak var model3dIcon: UIImageView!
     @IBOutlet weak var marmosetIcon: UIImageView!
     @IBOutlet weak var panoIcon: UIImageView!
-    
     @IBOutlet var icons: [UIImageView]!
     
     // MARK: Instance Properties
@@ -45,12 +35,32 @@ class ProjectCell: UICollectionViewCell {
         panoIcon.isHidden = !options.contains(.pano)
     }
     
-    func configure(with projectViewModel: ProjectViewModel, showAdditionaInfo: Bool) {
+    func configure(with projectViewModel: ProjectViewModel, and cellSize: CellSize) {
         self.projectViewModel = projectViewModel
         
-        loadImage(from: projectViewModel.imageLink)
+        let imageLink: URL
+        switch cellSize {
+        case .small: imageLink = projectViewModel.image200Link
+        case .medium: imageLink = projectViewModel.image400Link
+        case .large: imageLink = projectViewModel.image800Link
+        }
         
-        if showAdditionaInfo {
+        loadImage(
+            from: imageLink,
+            errorHandler: { //[weak self]
+                error in
+//                guard let sself = self else { return }
+                print("!!== load image error: \(error.localizedDescription)")
+        },
+            successHandler: { [weak self]  image in
+                guard let sself = self else { return }
+                DispatchQueue.main.async {
+                    sself.imageView.image = image
+                }
+            }
+        )
+        
+        if cellSize != .small {
             configureIcons(with: projectViewModel.iconOptions)
         }
     }
@@ -58,21 +68,10 @@ class ProjectCell: UICollectionViewCell {
     func updateImageViewWithImage(_ image: UIImage?) {
         if let image = image {
             imageView.image = image
-            
-//            imageView.alpha = 0
-//            UIView.animate(withDuration: 0.3, animations: {
-//                self.imageView.alpha = 1.0
-//                self.activityIndicator.alpha = 0
-//            }, completion: {
-//                _ in
-//                self.activityIndicator.stopAnimating()
-//            })
             activityIndicator.stopAnimating()
             activityIndicator.isHidden = true
         } else {
             imageView.image = nil
-//            imageView.alpha = 0
-//            activityIndicator.alpha = 1.0
             imageView.isHidden = true
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
@@ -85,6 +84,7 @@ class ProjectCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         imageView.image = UIImage(named: Consts.placeholerImage)
+        imageLoadingTask?.cancel()
         activityIndicator.isHidden = false
         icons.forEach{ $0.isHidden = true}
     }
@@ -108,34 +108,44 @@ protocol ImageLoading: class {
 }
 
 extension ImageLoading {
-    func loadImage(from url: URL) {
+    func loadImage(from url: URL,
+                   errorHandler: @escaping ErrorHandler,
+                   successHandler: @escaping LoadImageSuccesHandler) {
         activityIndicatorView.startAnimating()
         imageLoadingTask = ImageLoader.loadImage(
             from: url,
-            errorHandler: { [weak self] error in
-                guard let sself = self else { return }
-                sself.onImageLoaded(image: nil)
-        },
-            successHandler: { [weak self]  image in
-                guard let sself = self else { return }
-                sself.onImageLoaded(image: image)
-        })
+            errorHandler: errorHandler,
+            successHandler: successHandler
+//            errorHandler: { [weak self] error in
+//                guard let sself = self else { return }
+//                sself.onImageLoaded(image: nil)
+//        },
+//            successHandler: { [weak self]  image in
+//                guard let sself = self else { return }
+//                sself.onImageLoaded(image: image)
+//        }
+        )
     }
     
-    private var placeholerImage: UIImage {
-        let placeholerImage = "small_square-placehholder"
-        return UIImage(named: placeholerImage)!
-    }
+//    private var placeholerImage: UIImage {
+//        let placeholerImage = "small_square-placehholder"
+//        return UIImage(named: placeholerImage)!
+//    }
     
-    private func onImageLoaded(image: UIImage?) {
-        imageLoadingTask = nil
-        activityIndicatorView.stopAnimating()
-        guard let loadedImage = image else {
-            targetImageView.image = self.placeholerImage
-            return
-        }
-        targetImageView.image = loadedImage
-    }
+//    private func onImageLoaded(image: UIImage?) {
+//        imageLoadingTask = nil
+//        activityIndicatorView.stopAnimating()
+//        guard let loadedImage = image else {
+//            DispatchQueue.main.async {
+//                self.targetImageView.image = self.placeholerImage
+//            }
+//
+//            return
+//        }
+//        DispatchQueue.main.async {
+//            self.targetImageView.image = loadedImage
+//        }
+//    }
 }
 
 enum ImageLoaderError: Error {
@@ -147,12 +157,21 @@ typealias ErrorHandler = (Error) -> Void
 typealias LoadImageSuccesHandler = (UIImage) -> Void
 
 struct ImageLoader {
+    
+    static let imageCache = NSCache<NSString, UIImage>()
+    
     static func loadImage(from url: URL,
                           errorHandler: @escaping ErrorHandler,
                           successHandler: @escaping LoadImageSuccesHandler) -> URLSessionTask? {
         
-        if let cachedImage = LocalImageCache.image(for: url) {
+//        if let cachedImage = LocalImageCache.image(for: url) {
+//            successHandler(cachedImage)
+//            return nil
+//        }
+        
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
             successHandler(cachedImage)
+            print("💾 for \(url.lastPathComponent)")
             return nil
         }
         
@@ -166,6 +185,7 @@ struct ImageLoader {
                 }
                 LocalImageCache.write(image, for: url)
                 successHandler(image)
+                imageCache.setObject(image, forKey: url.absoluteString as NSString)
             }
         )
         
@@ -221,11 +241,11 @@ struct NetworkDataFetcher {
         from url: URL,
         errorHandler: @escaping ErrorHandler,
         successHandler: @escaping LoadDataSuccesHandler) -> URLSessionTask? {
-        
+        print("📡 for \(url.lastPathComponent)")
         let task = URLSession.shared.dataTask(with: url) {
             data, urlResponse, error in
             
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 if let networkError = error {
                     errorHandler(networkError)
                     return
@@ -236,7 +256,7 @@ struct NetworkDataFetcher {
                     return
                 }
                 errorHandler(NetworkError.noErrorAndNoData)
-            }
+//            }
         }
         
         task.resume()

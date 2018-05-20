@@ -46,7 +46,6 @@
 		2896A55320AD8D8C00F3292A /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2896A54920AD8D8B00F3292A /* OpenSans-SemiboldItalic.ttf */; };
 		2896A55920ADA15B00F3292A /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A55720ADA15B00F3292A /* AppColor.swift */; };
 		2896A55A20ADA15B00F3292A /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2896A55820ADA15B00F3292A /* AppFont.swift */; };
-		28A3A17E20B0622C0006415F /* ImageLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A17D20B0622C0006415F /* ImageLoaderProtocol.swift */; };
 		28A3A18020B07FB70006415F /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A17F20B07FB70006415F /* ImageProvider.swift */; };
 		28A3A18420B080FD0006415F /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18320B080FD0006415F /* AsyncOperation.swift */; };
 		28A3A18620B083590006415F /* DataLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A3A18520B083590006415F /* DataLoadOperation.swift */; };
@@ -111,7 +110,6 @@
 		2896A54920AD8D8B00F3292A /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		2896A55720ADA15B00F3292A /* AppColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		2896A55820ADA15B00F3292A /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
-		28A3A17D20B0622C0006415F /* ImageLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderProtocol.swift; sourceTree = "<group>"; };
 		28A3A17F20B07FB70006415F /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		28A3A18320B080FD0006415F /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		28A3A18520B083590006415F /* DataLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadOperation.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				283B82F920AF55FF006E76A8 /* ProjectCell.swift */,
-				28A3A17D20B0622C0006415F /* ImageLoaderProtocol.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -554,7 +551,6 @@
 				28A3A18620B083590006415F /* DataLoadOperation.swift in Sources */,
 				281C2D3020ADB0FF00B9FF7A /* Response.swift in Sources */,
 				2896A51F20AD89D300F3292A /* AppDelegate.swift in Sources */,
-				28A3A17E20B0622C0006415F /* ImageLoaderProtocol.swift in Sources */,
 				2896A55920ADA15B00F3292A /* AppColor.swift in Sources */,
 				281C2D4920ADD34700B9FF7A /* ProjectViewModel.swift in Sources */,
 				28A3A19020B09C1A0006415F /* ImageDecompressionOperation.swift in Sources */,

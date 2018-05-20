@@ -13,7 +13,9 @@ struct IconsOptions: OptionSet {
 struct ProjectViewModel {
     let id: Int
     let title: String
-    let imageLink: URL
+    let image200Link: URL
+    let image400Link: URL
+    let image800Link: URL
     let detailLink: URL
     let iconOptions: IconsOptions
 }

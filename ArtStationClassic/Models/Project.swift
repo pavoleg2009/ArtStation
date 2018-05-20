@@ -19,7 +19,6 @@ struct Project : Codable {
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-        
 		id = try values.decodeIfPresent(Int.self, forKey: .id)
 		title = try values.decodeIfPresent(String.self, forKey: .title)
 		coverAssetID = try values.decodeIfPresent(Int.self, forKey: .coverAssetID)
@@ -27,5 +26,4 @@ struct Project : Codable {
 		cover = try values.decodeIfPresent(Cover.self, forKey: .cover)
         icons = try values.decodeIfPresent(Icons.self, forKey: .icons)
 	}
-
 }

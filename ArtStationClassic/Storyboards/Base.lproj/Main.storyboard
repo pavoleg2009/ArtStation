@@ -96,6 +96,12 @@
                                             <constraint firstItem="02b-6J-iSR" firstAttribute="leading" secondItem="gKb-3i-8s5" secondAttribute="leading" constant="4" id="tZT-NE-z67"/>
                                             <constraint firstItem="2Jc-hx-XeL" firstAttribute="leading" secondItem="gKb-3i-8s5" secondAttribute="leading" id="wGB-Ny-6ms"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="maD-er-jRw"/>
+                                                <exclude reference="02b-6J-iSR"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <outlet property="activityIndicator" destination="maD-er-jRw" id="y4a-js-oFp"/>
                                             <outlet property="iconStack" destination="02b-6J-iSR" id="Uxx-jY-z2I"/>

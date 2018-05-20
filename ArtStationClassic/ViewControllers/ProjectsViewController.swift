@@ -1,5 +1,31 @@
 import UIKit
 
+enum CellSize: Int {
+    
+    case small, medium, large
+    
+    func next() -> CellSize {
+        switch self {
+        case .small: return .medium
+        case .medium: return .large
+        case .large: return .small
+        }
+    }
+    
+    var rowCount: CGFloat {
+        switch self {
+        case .small: return 3
+        case .medium: return 2
+        case .large: return 1
+        }
+    }
+    
+    static let prefecthFactor = 5
+    var prefectThreshold: Int {
+        return Int(self.rowCount) * CellSize.prefecthFactor
+    }
+}
+
 final class ProjectsViewController: UIViewController {
     
     // MARK: Outlets
@@ -16,13 +42,23 @@ final class ProjectsViewController: UIViewController {
         static let cellsSpacing: CGFloat = 4.0
     }
     
-    var columns: CGFloat = 3.0 {
+    var cellSize: CellSize = .small {
         didSet {
             configure(collectionView,
-                      forCellsInRow: columns,
-                      withSpacing: Consts.cellsSpacing)
+                      for: cellSize,
+                      and: Consts.cellsSpacing)
+            collectionView.reloadData()
+            
         }
     }
+    
+//    var columns: CGFloat = 3.0 {
+//        didSet {
+//            configure(collectionView,
+//                      forCellsInRow: columns,
+//                      withSpacing: Consts.cellsSpacing)
+//        }
+//    }
     
     private let projectService: ProjectService = ProjectServiceImpl()
     private var projectViewModels: [ProjectViewModel] = []
@@ -35,9 +71,7 @@ final class ProjectsViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func zoomIn(_ sender: UIBarButtonItem) {
-        columns = (columns == 1.0)
-            ? Consts.maxColumns
-            : columns - 1
+        cellSize = cellSize.next()
     }
     
     @objc private func refreshControlDidFire() {
@@ -48,11 +82,11 @@ final class ProjectsViewController: UIViewController {
     // MARK: Instance Methods
 
     private func configure(_ collectionView: UICollectionView,
-                           forCellsInRow cellsInRow: CGFloat,
-                           withSpacing spacing: CGFloat) {
+                           for cellsCize: CellSize,
+                           and spacing: CGFloat) {
         
-        let spaceForMagrins = (cellsInRow - 1.0) * spacing
-        let cellWidth = floor((collectionView.bounds.size.width - spaceForMagrins) / cellsInRow)
+        let spaceForMagrins = (cellsCize.rowCount - 1.0) * spacing
+        let cellWidth = floor((collectionView.bounds.size.width - spaceForMagrins) / cellsCize.rowCount)
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
@@ -132,6 +166,11 @@ final class ProjectsViewController: UIViewController {
         refreshControl.addTarget(self, action: selector, for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let verticalIndicator = scrollView.subviews.last as? UIImageView
+        verticalIndicator?.backgroundColor = AppColor.brandPrimary
+    }
 }
 
 // MARK: Overrides
@@ -145,8 +184,8 @@ extension ProjectsViewController {
     
     override func viewWillLayoutSubviews() {
         configure(collectionView,
-                  forCellsInRow: columns,
-                  withSpacing: Consts.cellsSpacing)
+                  for: cellSize,
+                  and: Consts.cellsSpacing)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -159,11 +198,6 @@ extension ProjectsViewController {
             viewController.projectViewModel = selectedProjectViewModel
         }
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let verticalIndicator = scrollView.subviews.last as? UIImageView
-        verticalIndicator?.backgroundColor = AppColor.brandPrimary
-    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -173,19 +207,11 @@ extension ProjectsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Consts.cellReuseIdenrtifier, for: indexPath) as? ProjectCell else { fatalError("==== Wrong cell type")}
-        
-        let prefetchThreshhold = Int(columns) * 5
-        print("Count: \(projectViewModels.count) Item: \(indexPath.item) prefetchThreshhold \(prefetchThreshhold)")
-        if (projectViewModels.count - indexPath.item) < prefetchThreshhold {
-            fetchNextPage()
-        }
+//        print("Count: \(projectViewModels.count) Item: \(indexPath.item) prefetchThreshhold \(cellSize.prefectThreshold)")
         
         let projectViewModel = projectViewModels[indexPath.item]
-        
-        let minColCountToShowIcons: CGFloat = 2.0
-        cell.configure(with: projectViewModel, showAdditionaInfo: columns <= minColCountToShowIcons)
+        cell.configure(with: projectViewModel, and: cellSize)
         
 //        let imageProvider = ImageProviderImpl(url: projectViewModel.imageLink) {
 //            image in
@@ -195,17 +221,16 @@ extension ProjectsViewController: UICollectionViewDataSource {
 //        }
 //        imageProviders.insert(imageProvider)
         
+        if (projectViewModels.count - indexPath.item) < cellSize.prefectThreshold {
+            fetchNextPage()
+        }
         return cell
     }
-    
 }
 
 // MARK: UICollectionViewDelegate
 extension ProjectsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        // show
-//        guard let selectedCell = collectionView.cellForItem(at: indexPath) else { return }
         selectedProjectViewModel = projectViewModels[indexPath.item]
         performSegue(withIdentifier: Consts.detailSegueIdentifier, sender: nil)
     }
