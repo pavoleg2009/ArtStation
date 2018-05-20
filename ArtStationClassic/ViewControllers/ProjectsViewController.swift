@@ -33,7 +33,6 @@ final class ProjectsViewController: UIViewController {
     @IBOutlet weak var zoomInButton: UIBarButtonItem!
     
     // MARK:
-    
     private struct Consts {
         static let cellReuseIdenrtifier = "ProjectCell"
         static let detailSegueIdentifier = "ShowProjectDetails"
@@ -51,14 +50,6 @@ final class ProjectsViewController: UIViewController {
             
         }
     }
-    
-//    var columns: CGFloat = 3.0 {
-//        didSet {
-//            configure(collectionView,
-//                      forCellsInRow: columns,
-//                      withSpacing: Consts.cellsSpacing)
-//        }
-//    }
     
     private let projectService: ProjectService = ProjectServiceImpl()
     private var projectViewModels: [ProjectViewModel] = []
@@ -183,6 +174,7 @@ extension ProjectsViewController {
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         configure(collectionView,
                   for: cellSize,
                   and: Consts.cellsSpacing)

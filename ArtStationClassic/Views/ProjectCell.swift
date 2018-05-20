@@ -52,10 +52,15 @@ class ProjectCell: UICollectionViewCell {
 //                guard let sself = self else { return }
                 print("!!== load image error: \(error.localizedDescription)")
         },
-            successHandler: { [weak self]  image in
+            successHandler: { [weak self]  image, url in
                 guard let sself = self else { return }
                 DispatchQueue.main.async {
-                    sself.imageView.image = image
+                    if self?.projectViewModel.image800Link.lastPathComponent == url.lastPathComponent {
+                        sself.imageView.image = image
+                    } else {
+                        print("!!== cell image update skipped")
+                    }
+                    
                 }
             }
         )
@@ -79,10 +84,12 @@ class ProjectCell: UICollectionViewCell {
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         icons.forEach{ $0.isHidden = true}
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         imageView.image = UIImage(named: Consts.placeholerImage)
         imageLoadingTask?.cancel()
         activityIndicator.isHidden = false
@@ -154,7 +161,7 @@ enum ImageLoaderError: Error {
 
 
 typealias ErrorHandler = (Error) -> Void
-typealias LoadImageSuccesHandler = (UIImage) -> Void
+typealias LoadImageSuccesHandler = (UIImage, URL) -> Void
 
 struct ImageLoader {
     
@@ -170,7 +177,7 @@ struct ImageLoader {
 //        }
         
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
-            successHandler(cachedImage)
+            successHandler(cachedImage, url)
             print("💾 for \(url.lastPathComponent)")
             return nil
         }
@@ -184,7 +191,7 @@ struct ImageLoader {
                     return
                 }
                 LocalImageCache.write(image, for: url)
-                successHandler(image)
+                successHandler(image, url)
                 imageCache.setObject(image, forKey: url.absoluteString as NSString)
             }
         )

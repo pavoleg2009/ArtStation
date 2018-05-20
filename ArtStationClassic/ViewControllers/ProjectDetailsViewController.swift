@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-class ProjectDetailsViewController: UIViewController {
+final class ProjectDetailsViewController: UIViewController {
     
     @IBOutlet weak var placeholdeView: UIView!
     
