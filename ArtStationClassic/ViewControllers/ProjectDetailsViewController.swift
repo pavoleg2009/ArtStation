@@ -3,12 +3,18 @@ import WebKit
 
 final class ProjectDetailsViewController: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var placeholdeView: UIView!
+    
+    // MARK: - Instance Properties
     
     var webView: WKWebView!
     var activityIndicator: UIActivityIndicatorView!
     var detailLink: URL?
     var projectViewModel: ProjectViewModel!
+    
+    // MARK: - Instance Methods
     
     private func loadProjectDetails(from url: URL, to webView: WKWebView) {
         let myRequest = URLRequest(url: url)
@@ -51,29 +57,35 @@ final class ProjectDetailsViewController: UIViewController {
             ? "\(String(titleStr.prefix(titleMaxCharCount)))..."
             : titleStr
     }
-    
-    
+}
+
+// MARK: - Overrides
+
+extension ProjectDetailsViewController {
+
     override func viewDidLoad() {
+        super.viewDidLoad()
         setTitle()
         createWebView()
         createActivityIndicator()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
         if let detailLink = detailLink {
             loadProjectDetails(from: detailLink, to: webView)
         }
     }
-
 }
+
+// MARK: - WKNavigationDelegate
 
 extension ProjectDetailsViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()

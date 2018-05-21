@@ -135,7 +135,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="cEp-Ic-Gra">
-                        <barButtonItem key="rightBarButtonItem" title="+" image="zoom-in" style="plain" id="xP6-gu-q0z">
+                        <barButtonItem key="rightBarButtonItem" image="zoom-in" id="xP6-gu-q0z">
                             <connections>
                                 <action selector="zoomIn:" destination="BYZ-38-t0r" id="wwb-dt-IdF"/>
                             </connections>

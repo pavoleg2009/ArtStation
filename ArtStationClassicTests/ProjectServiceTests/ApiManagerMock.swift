@@ -2,8 +2,8 @@ import Foundation
 @testable import ArtStationClassic
 
 final class ApiManagerMock_SuccessProjectsResult: ApiManager {
-    
-    func makeRequest<T>(request: T, onSuccess: @escaping (T.ResponseType?, URLSessionTask?) -> Void, onFailure: @escaping (ApiError, URLSessionTask?) -> Void) -> URLSessionTask? where T : Request {
+
+    func makeRequest<T>(request: T, onSuccess: @escaping (T.ResponseType?, URLSessionTask?) -> Void, onFailure: @escaping (ApiError, URLSessionTask?) -> Void) -> URLSessionDataTask? where T : Request {
         
         let jsonUrl = Bundle(for: type(of:self))
             .url(forResource: "projectsResponse", withExtension: "json")!

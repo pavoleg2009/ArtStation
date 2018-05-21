@@ -1,6 +1,5 @@
 import Foundation
 
-// Struct for holding request param and providing appropriate URL for request
 // https://www.artstation.com/projects.json?page=1&sorting=trending
 
 final class ProjectsGetRequest: Request {

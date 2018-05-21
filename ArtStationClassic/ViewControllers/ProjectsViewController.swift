@@ -28,11 +28,13 @@ enum CellSize: Int {
 
 final class ProjectsViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK: - Outlets
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var zoomInButton: UIBarButtonItem!
     
-    // MARK:
+    // MARK: - Constants
+    
     private struct Consts {
         static let cellReuseIdenrtifier = "ProjectCell"
         static let detailSegueIdentifier = "ShowProjectDetails"
@@ -41,15 +43,7 @@ final class ProjectsViewController: UIViewController {
         static let cellsSpacing: CGFloat = 4.0
     }
     
-    var cellSize: CellSize = .small {
-        didSet {
-            configure(collectionView,
-                      for: cellSize,
-                      and: Consts.cellsSpacing)
-            collectionView.reloadData()
-            
-        }
-    }
+    // MARK: - Intance Properties
     
     private let projectService: ProjectService = ProjectServiceImpl()
     private var projectViewModels: [ProjectViewModel] = []
@@ -58,9 +52,15 @@ final class ProjectsViewController: UIViewController {
     private var selectedProjectViewModel: ProjectViewModel?
     private var activeTask: URLSessionTask?
     
-    private var imageProviders: Set<ImageProviderImpl> = []
+    var cellSize: CellSize = .small {
+        didSet {
+            configure(collectionView, for: cellSize, and: Consts.cellsSpacing)
+            collectionView.reloadData()
+        }
+    }
     
     // MARK: - Actions
+    
     @IBAction func zoomIn(_ sender: UIBarButtonItem) {
         cellSize = cellSize.next()
     }
@@ -126,7 +126,6 @@ final class ProjectsViewController: UIViewController {
     }
     
     private func endUpdates() {
-        // hide spinner, unblock UI
         activeTask = nil
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
@@ -164,7 +163,8 @@ final class ProjectsViewController: UIViewController {
     }
 }
 
-// MARK: Overrides
+// MARK: - Overrides
+
 extension ProjectsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,26 +192,19 @@ extension ProjectsViewController {
     }
 }
 
-// MARK: UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
+
 extension ProjectsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return projectViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Consts.cellReuseIdenrtifier, for: indexPath) as? ProjectCell else { fatalError("==== Wrong cell type")}
-//        print("Count: \(projectViewModels.count) Item: \(indexPath.item) prefetchThreshhold \(cellSize.prefectThreshold)")
         
         let projectViewModel = projectViewModels[indexPath.item]
         cell.configure(with: projectViewModel, and: cellSize)
-        
-//        let imageProvider = ImageProviderImpl(url: projectViewModel.imageLink) {
-//            image in
-//            OperationQueue.main.addOperation {
-//                cell.updateImageViewWithImage(image)
-//            }
-//        }
-//        imageProviders.insert(imageProvider)
         
         if (projectViewModels.count - indexPath.item) < cellSize.prefectThreshold {
             fetchNextPage()
@@ -220,25 +213,11 @@ extension ProjectsViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate
+
 extension ProjectsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedProjectViewModel = projectViewModels[indexPath.item]
         performSegue(withIdentifier: Consts.detailSegueIdentifier, sender: nil)
     }
-
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        guard let cell = cell as? ProjectCell else { return }
-//
-//
-//    }
-//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        guard let cell = cell as? ProjectCell else { return }
-//
-//        for provider in imageProviders.filter({ $0.url == cell.projectViewModel.imageLink }) {
-//            provider.cancel()
-//            imageProviders.remove(provider)
-//            print("=== remove provider for: \(provider.url.lastPathComponent)")
-//        }
-//    }
 }

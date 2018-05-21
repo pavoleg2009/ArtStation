@@ -2,11 +2,17 @@ import Foundation
 
 final class ProjectServiceImpl: ProjectService {
     
+    // MARK: - Dependencies
+    
     let apiManager: ApiManager
+    
+    // MARK: - Initializers
     
     init(apiManager: ApiManager = ApiManagerImpl()) {
         self.apiManager = apiManager
     }
+    
+    // MARK: - Instance Methods
     
     func fetchProjects(page: Int, completion: @escaping FetchProjectCompletion) -> URLSessionDataTask? {
         
@@ -34,6 +40,8 @@ final class ProjectServiceImpl: ProjectService {
         return task
     }
 }
+
+// MARK: - Mapping API models to view models
 
 extension ProjectServiceImpl {
     
@@ -88,7 +96,6 @@ extension ProjectServiceImpl {
             
             projectsViewModels.append(projectViewModel)
         }
-        
         return projectsViewModels
     }
 }

@@ -1,4 +1,3 @@
 import Foundation
 
-protocol Response: Decodable {
-}
+protocol Response: Decodable {}

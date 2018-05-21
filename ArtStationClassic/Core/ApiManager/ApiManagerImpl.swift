@@ -2,18 +2,21 @@ import Foundation
 
 final class ApiManagerImpl: ApiManager {
     
-    // MARK: Dependencies
+    // MARK: - Dependencies
+    
     let session: URLSessionProtocol
     let parser: Parser
     
-    // MARK: Initializers
+    // MARK: - Initializers
+    
     init(session: URLSessionProtocol = URLSession(configuration: .default),
          parser: Parser = JSONParser()) {
         self.session = session
         self.parser = parser
     }
     
-    // MARK: Instance Methods
+    // MARK: - Instance Methods
+    
     @discardableResult
     func makeRequest<T: Request>(request: T,
                                  onSuccess: @escaping SuccessCallback<T.ResponseType>,
@@ -22,7 +25,6 @@ final class ApiManagerImpl: ApiManager {
         let urlRequest: URLRequest
         do {
             urlRequest = try request.urlRequest()
-            //            print("\n=== urlRequest.url = \(urlRequest.url)\n")
         } catch {
             onFailure(ApiError.badRequest, nil)
             return nil
@@ -41,9 +43,8 @@ final class ApiManagerImpl: ApiManager {
                     let result: T.ResponseType = try sself.parser.parse(data: data)
                     onSuccess(result, nil)
                 } catch {
-                    
-                    // TODO: Add cutom parsing error
-                    print("==== Parse Error: \(error.localizedDescription)")
+                    sself.handleParseError(error)
+
                 }
                 
             } else {
@@ -52,5 +53,25 @@ final class ApiManagerImpl: ApiManager {
         }
         task.resume()
         return task
-    }    
+    }
+    
+     // MARK: -
+    
+    private func handleParseError(_ error: Error) {
+        switch error {
+        case DecodingError.dataCorrupted(let context):
+            print("==== 🚫 Data coccupted. Description: \(context)")
+        case DecodingError.keyNotFound(let key, let context):
+            print("==== 🚫 Missing key: \(key)")
+            print("==== 🚫 Debug Description: \(context)")
+        case DecodingError.valueNotFound(let type, let context):
+            print("==== 🚫 Value of type: \(type) not found")
+            print("==== 🚫 Debug Description: \(context)")
+        case DecodingError.typeMismatch(let type, let context):
+            print("==== 🚫 Type mismathc for type: \(type)")
+            print("==== 🚫 Debug Description: \(context)")
+        default:
+            print("==== 🚫 \(error.localizedDescription)")
+        }
+    }
 }
